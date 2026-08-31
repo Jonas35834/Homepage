@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projekte | Jonas Hohl</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #f5f7ff;
+            background: #05070d;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 20% 20%, rgba(85,100,255,.18), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(0,210,255,.12), transparent 30%),
+                #05070d;
+        }
+
+        .grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: -50%;
+            top: -50%;
+
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+            background-size: 60px 60px;
+
+            transform: perspective(500px) rotateX(55deg);
+
+            animation: grid 20s linear infinite;
+        }
+
+        @keyframes grid {
+            from {
+                transform: perspective(500px) rotateX(55deg) translateY(0);
+            }
+
+            to {
+                transform: perspective(500px) rotateX(55deg) translateY(60px);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 70px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 7%;
+
+            background: rgba(5,7,13,.7);
+            backdrop-filter: blur(20px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+
+            z-index: 100;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #00d9ff;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            color: #929bb0;
+            text-decoration: none;
+            font-size: .9rem;
+            transition: .25s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: white;
+        }
+
+        main {
+            width: min(1100px, 90%);
+            margin: auto;
+            padding-top: 140px;
+            padding-bottom: 100px;
+        }
+
+        .header {
+            margin-bottom: 50px;
+        }
+
+        .label {
+            color: #00d9ff;
+            font-size: .7rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            letter-spacing: -.06em;
+            margin: 12px 0;
+        }
+
+        .description {
+            max-width: 650px;
+            color: #8e98ad;
+            line-height: 1.7;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            position: relative;
+            padding: 30px;
+            min-height: 270px;
+
+            background: rgba(13,19,32,.72);
+            border: 1px solid rgba(120,150,255,.14);
+            border-radius: 20px;
+
+            backdrop-filter: blur(15px);
+
+            transition: .3s;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: "";
+
+            position: absolute;
+            width: 160px;
+            height: 160px;
+
+            right: -70px;
+            top: -70px;
+
+            border-radius: 50%;
+
+            background: #6374ff;
+            filter: blur(70px);
+
+            opacity: .12;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(110,130,255,.4);
+        }
+
+        .number {
+            color: #6575ff;
+            font-size: .75rem;
+            letter-spacing: .15em;
+        }
+
+        .card h2 {
+            margin: 18px 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #8993a8;
+            line-height: 1.7;
+            font-size: .9rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        .tag {
+            padding: 6px 9px;
+            border-radius: 7px;
+
+            background: rgba(255,255,255,.05);
+            color: #9ca6ba;
+
+            font-size: .7rem;
+        }
+
+        footer {
+            padding: 35px 7%;
+
+            border-top: 1px solid rgba(255,255,255,.07);
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #687287;
+            font-size: .8rem;
+        }
+
+        @media (max-width: 700px) {
+
+            nav ul {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: .75rem;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+</div>
+
+<nav>
+    <a href="index.html" class="logo">
+        Jonas<span>.</span>
+    </a>
+
+    <ul>
+        <li><a href="index.html">Info</a></li>
+        <li><a href="projekte.html" class="active">Projekte</a></li>
+        <li><a href="nova.html">Nova</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <div class="header">
+
+        <span class="label">02 / Projekte</span>
+
+        <h1>
+            Dinge, die ich<br>
+            <span style="color:#7181ff;">baue.</span>
+        </h1>
+
+        <p class="description">
+            Eine Auswahl meiner Software-, Web-, KI- und
+            Hardwareprojekte. Die Liste wächst ständig.
+        </p>
+
+    </div>
+
+    <div class="projects">
+
+        <article class="card">
+            <span class="number">01</span>
+
+            <h2>Nova Code AI</h2>
+
+            <p>
+                Eine eigene Entwicklungsumgebung mit
+                KI-Unterstützung. Entwickelt für das
+                Arbeiten mit lokalen KI-Modellen und
+                modernen Entwicklerwerkzeugen.
+            </p>
+
+            <div class="tags">
+                <span class="tag">AI</span>
+                <span class="tag">React</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Tauri</span>
+            </div>
+        </article>
+
+        <article class="card">
+            <span class="number">02</span>
+
+            <h2>NovaPlanner</h2>
+
+            <p>
+                Eine Plattform für Veranstaltungen.
+                Eventseiten, Reservierungen, Umfragen
+                und Verwaltung werden in einer
+                Anwendung zusammengeführt.
+            </p>
+
+            <div class="tags">
+                <span class="tag">Web</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">JavaScript</span>
+            </div>
+        </article>
+
+        <article class="card">
+            <span class="number">03</span>
+
+            <h2>OHG-TV</h2>
+
+            <p>
+                Ein eigenes Streaming-System für
+                Schul-TV mit Live-Übertragung,
+                HLS und einer Weboberfläche.
+            </p>
+
+            <div class="tags">
+                <span class="tag">Streaming</span>
+                <span class="tag">HLS</span>
+                <span class="tag">Web</span>
+            </div>
+        </article>
+
+        <article class="card">
+            <span class="number">04</span>
+
+            <h2>Nova Pi Store</h2>
+
+            <p>
+                Eine Weboberfläche zur Verwaltung
+                und Installation von Anwendungen
+                auf Raspberry-Pi-Systemen.
+            </p>
+
+            <div class="tags">
+                <span class="tag">Linux</span>
+                <span class="tag">Raspberry Pi</span>
+                <span class="tag">APT</span>
+            </div>
+        </article>
+
+        <article class="card">
+            <span class="number">05</span>
+
+            <h2>ESP32 Projekte</h2>
+
+            <p>
+                Verschiedene Hardwareprojekte mit
+                ESP32-Mikrocontrollern, Bluetooth,
+                Sensoren und eigener Software.
+            </p>
+
+            <div class="tags">
+                <span class="tag">ESP32</span>
+                <span class="tag">Arduino</span>
+                <span class="tag">Bluetooth</span>
+            </div>
+        </article>
+
+        <article class="card">
+            <span class="number">06</span>
+
+            <h2>Weitere Projekte</h2>
+
+            <p>
+                Neue Ideen und Experimente befinden
+                sich bereits in Entwicklung.
+                Diese Seite wird regelmäßig erweitert.
+            </p>
+
+            <div class="tags">
+                <span class="tag">Coming soon</span>
+            </div>
+        </article>
+
+    </div>
+
+</main>
+
+<footer>
+    <span>© 2026 Jonas Hohl</span>
+    <span>Projects</span>
+</footer>
+
+</body>
+</html>
