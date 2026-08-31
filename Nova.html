@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova | Jonas Hohl</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #f5f7ff;
+            background: #05070d;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+
+            background:
+                radial-gradient(circle at 50% 20%, rgba(90,100,255,.18), transparent 30%),
+                radial-gradient(circle at 20% 80%, rgba(0,220,255,.1), transparent 30%),
+                #05070d;
+        }
+
+        .grid {
+            position: absolute;
+            inset: -50%;
+
+            width: 200%;
+            height: 200%;
+
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+            background-size: 60px 60px;
+
+            transform: perspective(500px) rotateX(55deg);
+
+            animation: grid 20s linear infinite;
+        }
+
+        @keyframes grid {
+            from {
+                transform: perspective(500px) rotateX(55deg) translateY(0);
+            }
+
+            to {
+                transform: perspective(500px) rotateX(55deg) translateY(60px);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 70px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 7%;
+
+            background: rgba(5,7,13,.7);
+            backdrop-filter: blur(20px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+
+            z-index: 100;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #00d9ff;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            color: #929bb0;
+            text-decoration: none;
+            font-size: .9rem;
+            transition: .25s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: white;
+        }
+
+        main {
+            width: min(1100px, 90%);
+            margin: auto;
+            padding-top: 140px;
+            padding-bottom: 100px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0 110px;
+        }
+
+        .nova-logo {
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 900;
+            letter-spacing: -.1em;
+            line-height: .8;
+
+            background: linear-gradient(
+                90deg,
+                white,
+                #8190ff,
+                #00d9ff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            margin-bottom: 30px;
+        }
+
+        .subtitle {
+            color: #8e98ad;
+            max-width: 650px;
+            margin: auto;
+
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .label {
+            color: #00d9ff;
+            font-size: .7rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: clamp(2.3rem, 6vw, 4rem);
+            letter-spacing: -.05em;
+            margin: 10px 0 40px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 20px;
+        }
+
+        .main-card {
+            padding: 40px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(100,115,255,.14),
+                    rgba(0,210,255,.03)
+                );
+
+            border: 1px solid rgba(120,150,255,.18);
+        }
+
+        .main-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+        }
+
+        .main-card p {
+            color: #8993a8;
+            line-height: 1.8;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .item {
+            padding: 22px;
+
+            border-radius: 17px;
+
+            background: rgba(255,255,255,.025);
+            border: 1px solid rgba(120,150,255,.13);
+
+            transition: .25s;
+        }
+
+        .item:hover {
+            transform: translateX(5px);
+            border-color: rgba(120,150,255,.35);
+        }
+
+        .item strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .item span {
+            color: #7f899e;
+            font-size: .85rem;
+        }
+
+        footer {
+            padding: 35px 7%;
+
+            border-top: 1px solid rgba(255,255,255,.07);
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #687287;
+            font-size: .8rem;
+        }
+
+        @media (max-width: 700px) {
+
+            nav ul {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: .75rem;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .main-card {
+                padding: 28px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+</div>
+
+<nav>
+    <a href="index.html" class="logo">
+        Jonas<span>.</span>
+    </a>
+
+    <ul>
+        <li><a href="index.html">Info</a></li>
+        <li><a href="projekte.html">Projekte</a></li>
+        <li><a href="nova.html" class="active">Nova</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <section class="hero">
+
+        <div class="nova-logo">
+            nova
+        </div>
+
+        <p class="subtitle">
+            Mein eigenes Entwicklerstudio für Software,
+            Webentwicklung, künstliche Intelligenz und
+            technische Experimente.
+        </p>
+
+    </section>
+
+    <section>
+
+        <span class="label">03 / Nova</span>
+
+        <h2>
+            Ideas into<br>
+            <span style="color:#7181ff;">reality.</span>
+        </h2>
+
+        <div class="content">
+
+            <div class="main-card">
+
+                <h3>Was ist Nova?</h3>
+
+                <p>
+                    Nova ist mein eigenes kleines
+                    Entwicklerstudio. Hier entwickle ich
+                    eigene Software und probiere neue
+                    Technologien aus.
+
+                    <br><br>
+
+                    Das Ziel ist, aus Ideen funktionierende
+                    Produkte zu machen – egal ob es sich
+                    um eine Webanwendung, ein KI-Tool,
+                    eine Desktop-App oder ein
+                    Hardwareprojekt handelt.
+                </p>
+
+            </div>
+
+            <div class="items">
+
+                <div class="item">
+                    <strong>Software</strong>
+                    <span>
+                        Eigene Apps, Tools und Programme
+                    </span>
+                </div>
+
+                <div class="item">
+                    <strong>Web Development</strong>
+                    <span>
+                        Websites und moderne Webanwendungen
+                    </span>
+                </div>
+
+                <div class="item">
+                    <strong>Artificial Intelligence</strong>
+                    <span>
+                        KI und lokale Modelle
+                    </span>
+                </div>
+
+                <div class="item">
+                    <strong>Hardware</strong>
+                    <span>
+                        Raspberry Pi, ESP32 und Elektronik
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <span>© 2026 Jonas Hohl</span>
+    <span>Nova Development Studio</span>
+</footer>
+
+</body>
+  </html><!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova | Jonas Hohl</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #f5f7ff;
+            background: #05070d;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+
+            background:
+                radial-gradient(circle at 50% 20%, rgba(90,100,255,.18), transparent 30%),
+                radial-gradient(circle at 20% 80%, rgba(0,220,255,.1), transparent 30%),
+                #05070d;
+        }
+
+        .grid {
+            position: absolute;
+            inset: -50%;
+
+            width: 200%;
+            height: 200%;
+
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+            background-size: 60px 60px;
+
+            transform: perspective(500px) rotateX(55deg);
+
+            animation: grid 20s linear infinite;
+        }
+
+        @keyframes grid {
+            from {
+                transform: perspective(500px) rotateX(55deg) translateY(0);
+            }
+
+            to {
+                transform: perspective(500px) rotateX(55deg) translateY(60px);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 70px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 7%;
+
+            background: rgba(5,7,13,.7);
+            backdrop-filter: blur(20px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+
+            z-index: 100;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #00d9ff;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            color: #929bb0;
+            text-decoration: none;
+            font-size: .9rem;
+            transition: .25s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: white;
+        }
+
+        main {
+            width: min(1100px, 90%);
+            margin: auto;
+            padding-top: 140px;
+            padding-bottom: 100px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0 110px;
+        }
+
+        .nova-logo {
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 900;
+            letter-spacing: -.1em;
+            line-height: .8;
+
+            background: linear-gradient(
+                90deg,
+                white,
+                #8190ff,
+                #00d9ff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            margin-bottom: 30px;
+        }
+
+        .subtitle {
+            color: #8e98ad;
+            max-width: 650px;
+            margin: auto;
+
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .label {
+            color: #00d9ff;
+            font-size: .7rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: clamp(2.3rem, 6vw, 4rem);
+            letter-spacing: -.05em;
+            margin: 10px 0 40px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 20px;
+        }
+
+        .main-card {
+            padding: 40px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(100,115,255,.14),
+                    rgba(0,210,255,.03)
+                );
+
+            border: 1px solid rgba(120,150,255,.18);
+        }
+
+        .main-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+        }
+
+        .main-card p {
+            color: #8993a8;
+            line-height: 1.8;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .item {
+            padding: 22px;
+
+            border-radius: 17px;
+
+            background: rgba(255,255,255,.025);
+            border: 1px solid rgba(120,150,255,.13);
+
+            transition: .25s;
+        }
+
+        .item:hover {
+            transform: translateX(5px);
+            border-color: rgba(120,150,255,.35);
+        }
+
+        .item strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .item span {
+            color: #7f899e;
+            font-size: .85rem;
+        }
+
+        footer {
+            padding: 35px 7%;
+
+            border-top: 1px solid rgba(255,255,255,.07);
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #687287;
+            font-size: .8rem;
+        }
+
+        @media (max-width: 700px) {
+
+            nav ul {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: .75rem;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .main-card {
+                padding: 28px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+</div>
+
+<nav>
+    <a href="index.html" class="logo">
+        Jonas<span>.</span>
+    </a>
+
+    <ul>
+        <li><a href="index.html">Info</a></li>
+        <li><a href="projekte.html">Projekte</a></li>
+        <li><a href="nova.html" class="active">Nova</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <section class="hero">
+
+        <div class="nova-logo">
+            nova
+        </div>
+
+        <p class="subtitle">
+            Mein eigenes Entwicklerstudio für Software,
+            Webentwicklung, künstliche Intelligenz und
+            technische Experimente.
+        </p>
+
+    </section>
+
+    <section>
+
+        <span class="label">03 / Nova</span>
+
+        <h2>
+            Ideas into<br>
+            <span style="color:#7181ff;">reality.</span>
+        </h2>
+
+        <div class="content">
+
+            <div class="main-card">
+
+                <h3>Was ist Nova?</h3>
+
+                <p>
+                    Nova ist mein eigenes kleines
+                    Entwicklerstudio. Hier entwickle ich
+                    eigene Software und probiere neue
+                    Technologien aus.
+
+                    <br><br>
+
+                    Das Ziel ist, aus Ideen funktionierende
+                    Produkte zu machen – egal ob es sich
+                    um eine Webanwendung, ein KI-Tool,
+                    eine Desktop-App oder ein
+                    Hardwareprojekt handelt.
+                </p>
+
+            </div>
+
+            <div class="items">
+
+                <div class="item">
+                    <strong>Software</strong>
+                    <span>
+                        Eigene Apps, Tools und Programme
+                    </span>
+                </div>
+
+                <div class="item">
+                    <strong>Web Development</strong>
+                    <span>
+                        Websites und moderne Webanwendungen
+                    </span>
+                </div>
+
+                <div class="item">
+                    <strong>Artificial Intelligence</strong>
+                    <span>
+                        KI und lokale Modelle
+                    </span>
+                </div>
+
+                <div class="item">
+                    <strong>Hardware</strong>
+                    <span>
+                        Raspberry Pi, ESP32 und Elektronik
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <span>© 2026 Jonas Hohl</span>
+    <span>Nova Development Studio</span>
+</footer>
+
+</body>
+</html>
